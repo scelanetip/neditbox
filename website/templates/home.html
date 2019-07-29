@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en-US">
+<head>
+    <title>NeditBox: Image Editor </title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="user-scalable=no, width=device-width, height=device-height, initial-scale=1, maximum-scale=1"/>
+    <meta name="description"
+          content="Experience NeditboX, the next generation photo editor! No installation and registration required. Use for free on desktop, tablets & phones.">
+    <meta name="keywords"
+          content="photo editing,photo editor,photoshop,free,lightroom,lightroom download,free lightroom download,free online photo editor,online photo editor,online raw photo,aperture,snapseed,pixlr,vsco,picmonkey,best iphone photo editor,iphone photo editor,android photo editor,photography,editing,foto,retouching,processing,preset,filter,tutorial">
+
+    <meta property="og:site_name" content="Photo Editor : Neditbox.com - free image editing online"/>
+    <meta property="og:title" content="Photo Editor : Neditbox.com - free image editing online"/>
+    <meta property="og:description"
+          content="Experience NeditboX, the next generation photo editor! No installation and registration required. Use for free on desktop, tablets & phones."/>
+    <meta property="og:image" content="/images/best-photo-editor-cover.jpg"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://neditbox.com/x"/>
+
+    <link rel="shortcut icon" href="">
+    <link rel="icon" href="">
+
+
+    <link rel="stylesheet" href="{% static 'dist/main.96b83bb19adf9b611d59' %}.css" type="text/css" charset="utf-8"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+     <script src="{% static 'dist/perspective.js' %}"></script>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script src="{% static 'js/exif-js.js' %}"></script>
+<script async src="{% static 'x/js/ffo.js' %}"></script>
+
+
+<style>
+
+
+img {
+    width: 100%; /* or any custom size */
+    height: 100%;
+    object-fit: contain;
+}
+
+#container
+{
+margin-top: 16px !important;
+color: hsla(0,0%,100%,.8);
+background-color: #23262a;
+border-radius: 8px;
+padding: 30px;
+display:flex;
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:space-between}
+
+#container div
+{
+object-position:50% 50%;
+height:100px;
+width:19%;
+border-radius:1px;
+cursor:pointer;
+margin:5px}
+
+canvas-perspective {
+    border: 1px solid #888888;
+
+
+}
+
+</style>
+
+</head>
+<body>
+
+
+<div id="home">
+
+
+
+    <a id="toggle-editor" tooltip="back to editor" flow="right" onclick="toogleHome()"><img
+            src="{% static 'x/img/home.svg' %} "/></a>
+
+    <div id="wrap">
+        <a id="home-logo" href=""> neditbox </a>
+
+        <div id="menu-section">
+
+            <div class="flatbox">
+
+
+                <!--                <input id="home-open-image" class="button positive pad-20" type="file"  value="open image" onclick="myFunction()" >-->
+
+                <label for="files"> <a id="home-open-image" class="button positive pad-20">open image </a></label>
+                <input id="files" style="visibility:hidden;" type="file" onchange="previewFile()">
+
+
+                <a id="home-open-url" class="button positive pad-16">load url</a>
+
+
+                <small class="tip pad-16" style="display: block">You can also drag and drop files or paste from the
+                    clipboard to open.
+                </small>
+            </div>
+        </div>
+
+        <div id="home-section">
+
+            <div class="flatbox" id="home-box" style="min-height:400px;">
+<!--                 <div id="file-content"></div>-->
+                <img  id="imgedit"  src="" alt="Upload whatever image you want to edit" style=" max-width:75%;
+  max-height:75%;" />
+
+
+
+
+            </div>
+
+
+            <div id="container"   class="dropzone">
+                <p style="flex-grow:3 ">AVAILABLE TVs</p>
+
+
+                {%for tv in tvs%}
+
+                <div id="yes-drop" class="interactable">
+
+                    <img id="img-{{tv.name}}"  src="{{tv.image}}" alt="" class="resizable"/>
+                </div>
+
+                {%endfor%}
+                <div  id="yes-drop" class="interactable">
+<!--                    <img id="star-demo" class="draggable" src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg"/> -->
+                <canvas id="canvas-perspective" class="resizable" ></canvas>
+                    <script>
+                    (function () {
+
+                    window.addEventListener("load", function() {
+
+                        var canvas = document.getElementById("canvas-perspective");
+                        var ctx = canvas.getContext('2d');
+
+                        var canvas1 = document.createElement('canvas');
+                        canvas1.width = canvas.width;
+                        canvas1.height = canvas.height;
+                        var ctx1 = canvas1.getContext('2d');
+
+                        var canvas2 = document.createElement('canvas');
+                        canvas2.width = canvas.width;
+                        canvas2.height = canvas.height;
+                        var ctx2 = canvas2.getContext('2d');
+                        //
+                        var op = null;
+                        var points = null
+                        var img = new Image();
+
+                        img.onload = function() {
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            canvas1.width = img.width;
+                            canvas1.height = img.height;
+                            canvas2.width = img.width;
+                            canvas2.height = img.height;
+                            op = new Perspective(ctx, img);
+                             points = [
+                                        [0, 0],
+                                        [img.width, 0],
+                                        [img.width, img.height],
+                                        [0, img.height]
+                                       ]
+                        // img
+                            op.draw(points);
+                            prepare_lines(ctx2, points);
+                            draw_canvas(ctx, ctx1, ctx2);
+                        };
+                        img.src = "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg";
+                        //"{% static 'x/img/pic.jpg' %}";
+
+
+                        var drag = null;
+                        canvas.addEventListener("mousedown", function(event) {
+                            event.preventDefault();
+                            var p = get_mouse_position(event);
+                            for( var i=0; i<4; i++ ) {
+                                var x = points[i][0];
+                                var y = points[i][1];
+                                if( p.x < x + 10 && p.x > x - 10 && p.y < y + 10 && p.y > y - 10 ) {
+                                    drag = i;
+                                    break;
+                                }
+                            }
+                        }, false);
+                        canvas.addEventListener("mousemove", function(event) {
+                            event.preventDefault();
+                            if(drag == null) { return; }
+                            var p = get_mouse_position(event);
+                            points[drag][0] = p.x;
+                            points[drag][1] = p.y;
+                            prepare_lines(ctx2, points, true);
+                            draw_canvas(ctx, ctx1, ctx2);
+                        }, false);
+                        canvas.addEventListener("mouseup", function(event) {
+                            event.preventDefault();
+                            if(drag == null) { return; }
+                            var p = get_mouse_position(event);
+                            points[drag][0] = p.x;
+                            points[drag][1] = p.y;
+                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                            ctx1.clearRect(0, 0, canvas.width, canvas.height);
+                    var s = (new Date()).getTime();
+                            op.draw(points);
+                    document.getElementById("ms").innerHTML = ( (new Date()).getTime() - s );
+                            prepare_lines(ctx2, points);
+                            draw_canvas(ctx, ctx1, ctx2);
+                            drag = null;
+                        }, false);
+                        canvas.addEventListener("mouseout", function(event) {
+                            event.preventDefault();
+                            drag = null;
+                        }, false);
+                        canvas.addEventListener("mouseenter", function(event) {
+                            event.preventDefault();
+                            drag = null;
+                        }, false);
+
+                    }, false);
+
+
+                    function prepare_lines(ctx, p, with_line) {
+                        ctx.save();
+                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                        //ctx.clearRect(0, 0, 600, 450);
+                        //
+                        if( with_line == true ) {
+                            ctx.beginPath();
+                            ctx.moveTo(p[0][0], p[0][1]);
+                            for( var i=1; i<4; i++ ) {
+                                ctx.lineTo(p[i][0], p[i][1]);
+                            }
+                            ctx.closePath();
+                            ctx.strokeStyle = "red";
+                            ctx.stroke();
+                        }
+                        //
+                        ctx.fillStyle = "red";
+                        for( var i=0; i<4; i++ ) {
+                            ctx.beginPath();
+                            ctx.arc(p[i][0], p[i][1], 4, 0, Math.PI*2, true);
+                            ctx.fill();
+                        }
+                        //
+                        ctx.restore();
+                    }
+
+                    function draw_canvas(ctx, ctx1, ctx2) {
+<!--                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);-->
+                        ctx.drawImage(ctx1.canvas, 0, 0);
+                        ctx.drawImage(ctx2.canvas, 0, 0);
+                    }
+
+                    function get_mouse_position(event) {
+                        var rect = event.target.getBoundingClientRect() ;
+                        return {
+                            x: event.clientX - rect.left,
+                            y: event.clientY - rect.top
+                        };
+                    }
+
+                    })();
+
+                    </script>
+
+                </div>
+                <p>Processing Time: <span id="ms">-</span> ms</p>
+
+
+            </div>
+
+<script src="{% static 'dist/accp.js' %}"></script>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+</body>
+</html>

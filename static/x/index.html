@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Photo Editor : Pixlr X - free image editing online</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="user-scalable=no, width=device-width, height=device-height, initial-scale=1, maximum-scale=1" />
+        <meta name="description" content="No installation and registration required. Use for free on desktop" >
+        <meta name="keywords" content="photo editing,photo editor,photoshop,free,lightroom,lightroom download,free lightroom download,free online photo editor,online photo editor,online raw photo,aperture,snapseed,pixlr,vsco,picmonkey,best iphone photo editor,iphone photo editor,android photo editor,photography,editing,foto,retouching,processing,preset,filter,tutorial">
+        
+        <meta property="og:site_name" content="Photo Editor : NeditBox "/>
+        <meta property="og:title" content="Photo Editor : NeditBox " />
+        <meta property="og:description" content=" No installation and registration required. Use for free on desktop" />
+        <meta property="og:image" content="/images/best-photo-editor-cover.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="" />
+        
+        <link rel="shortcut icon" href="https://img-cdn.pixlr.com/images/pixlr-logo3-grey-16x16.ico">
+        <link rel="icon" href="https://img-cdn.pixlr.com/images/pixlr-logo3-grey-16x16.ico">
+
+        
+        <link rel="stylesheet" href="https://pixlr.com/dist/main.96b83bb19adf9b611d59.css" type="text/css" charset="utf-8" />
+        
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1830856-4"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); gtag('config', 'UA-1830856-4');
+        </script>
+
+    </head>
+    <body>
+
+    <div id="workspace" style="display:none"></div>
+    <div id="home"><a id="toggle-editor" tooltip="back to editor" flow="right"><img src="https://pixlr.com/x/img/home.svg"/></a>
+
+<div id="wrap">
+    <a id="home-logo" href="https://pixlr.com/">pixlr</a>
+
+    <div id="menu-section">
+        <div class="flatbox" style="padding:20px;">
+
+            <a id="home-open-image" class="button positive pad-20" style="display:block;width:100%;">open image</a>
+            <a id="home-open-url" class="button positive pad-16" style="display:block;width:100%;background:#4d515a !important">load url</a>
+            
+            <small class="tip pad-16" style="display: block">You can also drag and drop files or paste from the clipboard to open.</small>
+        </div>
+    </div>
+
+    <div id="home-section">
+
+        <div class="flatbox" id="home-box" style="min-height:400px;">
+
+            <ul id="home-menu" class="tab-menu">
+                    <li data="recent" class="selected" id="recent-tab">history</li>
+                    <li data="new" id="new-tab">create new</li>
+                    <!--<li data="template" id="template-tab">template</li>-->
+                    <li data="search" id="search-tab">stock search</li>
+            </ul>
+
+            <div id="welcome" style="display: none;">
+
+                <h1>Welcome to the Pixlr x photo editor</h1>
+                <p>You have no images in your history, to start editing just select "Open image" or "Load url" to the left.</p>
+                <br/><br/>
+
+                <p>You can also test the editor out with one of our examples.</p>
+
+            </div>
+
+            <div id="recent-content" style="display:none">
+                <div id="recent-pinned-divider" class="divider">
+                    <label>pinned projects</label>
+                    <hr />
+                </div>
+                <div id="recent-pinned" style="display: none;"></div>
+                
+                <div id="recent-latest-divider" class="divider">
+                    <label>last 10 projects</label>
+                    <hr />
+                </div>
+                <div id="recent-latest" style="display: none;min-height:60px;"></div>
+                
+                
+
+                <div id="recent-controls" style="display: none;">
+                    <div class="tip">TIP! If you want to keep a document then click the heart icon to pin it.</div>
+                    <div class="buttons">
+                        <a id="recent-clear" class="button negative">clear history</a>
+                    </div>
+                </div>           
+            </div>
+            <div id="new-content" style="display:none">
+            
+                <div class="flex" id="holder-create-new">
+
+                    <div id="create-new-presets" style="flex-grow:2">
+
+                        <div data="800:600" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/new-canvas.svg" class="icon"></div>
+                            <span>web small</span>
+                            <small>800x600</small>
+                        </div>
+                        <div data="1280:720" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/new-canvas.svg" class="icon"></div>
+                            <span>web 720p</span>
+                            <small>1280x720</small>
+                        </div>
+                        <div data="1920:1080" class="image-box new-canvas selected">
+                            <div class="holder"><img src="https://pixlr.com/x/img/new-canvas.svg" class="icon"></div>
+                            <span>full hd</span>
+                            <small>1920x1080</small>
+                        </div>
+                        <div data="2560:1440" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/new-canvas.svg" class="icon"></div>
+                            <span>web 1440p</span>
+                            <small>2560x1440</small>
+                        </div>
+                        <div data="3840:2160" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/new-canvas.svg" class="icon"></div>
+                            <span>ultra hd</span>
+                            <small>3840x2160</small>
+                        </div>
+                        <div data="1080:1080" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/instagram.svg" class="icon"></div>
+                            <span>instagram</span>
+                            <small>1080x1080</small>
+                        </div>
+                        <div data="1080:1920" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/instagram.svg" class="icon"></div>
+                            <span>instagram story</span>
+                            <small>1080x1920</small>
+                        </div>
+
+                        <div data="828:465" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/facebook.svg" class="icon"></div>
+                            <span>facebook cover</span>
+                            <small>828x465</small>
+                        </div>
+                        <div data="360:360" class="image-box new-canvas">
+                            <div class="holder"><img src="https://pixlr.com/x/img/facebook.svg" class="icon"></div>
+                            <span>facebook profile</span>
+                            <small>360x360</small>
+                        </div>
+                    </div>
+
+                    <div id="create-new-box">
+
+                        <div class="group">
+                            <label class="pad-0">name</label>
+                            <input type="text" style="width:200px;" id="new-canvas-name" value="Untitled" />
+
+                            <label class="split pad-20">width <input type="number" id="new-canvas-width" value="1920"/></label>
+                            <label class="split">height <input type="number" id="new-canvas-height" value="1080"/></label>
+                            <label class="pad-10" style="text-align:right;font-size:10px;">max 4096 x 4096 px</label>
+                            <input type="checkbox" id="new-canvas-background" />
+                            <label class="switch" for="new-canvas-background">background<span></span></label>
+                            <div class="switch-content">
+                                <div id="new-canvas-background-color-picker" class="color-picker pad-0"></div>
+                            </div>
+                        </div>
+
+                        <div class="pad-30" style="text-align:right;">
+                            <a class="button positive" id="create-new">create</a>
+                        </div>
+
+                    </div>
+                </div>
+            
+            </div>
+            <div id="template-content" style="display:none">template</div>
+            <div id="search-content" style="display:none">
+                <div class="group" style="margin: 0 0 15px 0">
+                    <label class="hl pad-0">search</label>
+                    <input id="search-input" type="text" style="width: 100%;" />
+                </div>
+            
+                <div id="search-content-result"></div>
+
+                <ul id="search-loading" class="loading">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+
+                <a class="button positive" id="search-more" style="display: none; margin: 15px auto 0 auto;">load more</a>
+            </div>
+        </div>
+
+        
+            <div class="flatbox pad-16" id="example-photo" style="padding:20px">
+                    <div style="flex-grow: 4">example photo</div>
+                    <img src="https://pixlr.com/photo/image-editing-1-1-pw.jpg" alt="image-editing" />
+                    <img src="https://pixlr.com/photo/image-editing-2-3-pw.jpg" alt="image-editing" />
+                    <img src="https://pixlr.com/photo/photo-shop-5-2-pw.jpg" alt="photo-shop" />
+                    <img src="https://pixlr.com/photo/online-image-editor-6-3-pw.jpg" alt="online-image-editor" />
+                    <img src="https://pixlr.com/photo/image-editor-8-3-pw.jpg" alt="image-editor" />
+                        
+            </div>
+            <!--<div class="flatbox half" id="social-box">
+                <div class="vertical-align">
+                    <div style="text-align: center;">open your images directly from facebook, dropbox or google drive</div>
+                    <div class="pad-30" style="text-align: center;">
+                        <a class="button positive" href="javascript:alert('Will be availabe next update!');" style="background:#df4931 !important;margin-right:16px;">google</a>
+                        <a class="button positive" href="javascript:alert('Will be availabe next update!');" style="background:#3c66c4 !important">facebook</a>
+                    </div>
+                </div>
+            </div>-->
+
+    </div>
+</div></div>
+    <div id="notification"></div>
+
+    <div id="config_data"></div>
+
+    
+    <script src="https://pixlr.com/dist/main.1351ce7e2ce11cd12e5a.js"></script>
+    
+    <script src="https://pixlr.com/js/exif-js.js"></script>
+    <script async src="https://pixlr.com/x/js/ffo.js"></script>
+
+    </body>
+</html>

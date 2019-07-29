@@ -1,0 +1,18 @@
+<svg width="32" height="32" version="1.1" viewBox="0 0 31.999999 31.999999" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1{fill:#fff;}</style>
+ </defs>
+ <title>arrange</title>
+ <g transform="scale(1.0369)" stroke-width=".96438" data-name="Layer 2">
+  <g stroke-width=".96438" data-name="Layer 1">
+   <path class="cls-1" d="m15.43 30.86a15.43 15.43 0 1 1 15.43 -15.43 15.45 15.45 0 0 1 -15.43 15.43zm0-29.15a13.72 13.72 0 1 0 13.71 13.72 13.74 13.74 0 0 0 -13.71 -13.72z" fill="#fff" stroke-width=".96438"/>
+  </g>
+ </g>
+ <g transform="matrix(.042278 0 0 .044093 8.2691 5.3616)" stroke-width="23.161">
+  <g stroke-width="23.161">
+   <g stroke-width="23.161">
+    <path d="m504.5 75.496c-9.997-9.998-26.205-9.998-36.204 0l-306.7 306.71-117.89-117.89c-9.997-9.998-26.205-9.997-36.204 0-9.998 9.997-9.998 26.205 0 36.203l135.99 135.99c9.994 9.997 26.214 9.99 36.204 0l324.81-324.81c9.998-9.997 9.997-26.206 0-36.204z" fill="#fff" stroke-width="23.161"/>
+   </g>
+  </g>
+ </g>
+</svg>
