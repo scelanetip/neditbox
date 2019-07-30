@@ -67,7 +67,10 @@ margin:5px}
 
 canvas-perspective {
     border: 1px solid #888888;
-
+    width: 100%; /* or any custom size */
+    height: 100%;
+    object-fit: contain;
+    position: absolute
 
 }
 
@@ -126,155 +129,19 @@ canvas-perspective {
 
                 {%for tv in tvs%}
 
-                <div id="yes-drop" class="interactable">
+                <div >
 
-                    <img id="img-{{tv.name}}"  src="{{tv.image}}" alt="" class="resizable"/>
+                    <img id="img-{{tv.name}}"  src="{{tv.image}}" alt="" />
                 </div>
 
                 {%endfor%}
-                <div  id="yes-drop" class="interactable">
+                <div>
 <!--                    <img id="star-demo" class="draggable" src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg"/> -->
-                <canvas id="canvas-perspective" class="resizable" ></canvas>
-                    <script>
-                    (function () {
+                <canvas id="canvas-perspective" class="interactable" ></canvas>
 
-                    window.addEventListener("load", function() {
-
-                        var canvas = document.getElementById("canvas-perspective");
-                        var ctx = canvas.getContext('2d');
-
-                        var canvas1 = document.createElement('canvas');
-                        canvas1.width = canvas.width;
-                        canvas1.height = canvas.height;
-                        var ctx1 = canvas1.getContext('2d');
-
-                        var canvas2 = document.createElement('canvas');
-                        canvas2.width = canvas.width;
-                        canvas2.height = canvas.height;
-                        var ctx2 = canvas2.getContext('2d');
-                        //
-                        var op = null;
-                        var points = null
-                        var img = new Image();
-
-                        img.onload = function() {
-                            canvas.width = img.width;
-                            canvas.height = img.height;
-                            canvas1.width = img.width;
-                            canvas1.height = img.height;
-                            canvas2.width = img.width;
-                            canvas2.height = img.height;
-                            op = new Perspective(ctx, img);
-                             points = [
-                                        [0, 0],
-                                        [img.width, 0],
-                                        [img.width, img.height],
-                                        [0, img.height]
-                                       ]
-                        // img
-                            op.draw(points);
-                            prepare_lines(ctx2, points);
-                            draw_canvas(ctx, ctx1, ctx2);
-                        };
-                        img.src = "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg";
-                        //"{% static 'x/img/pic.jpg' %}";
-
-
-                        var drag = null;
-                        canvas.addEventListener("mousedown", function(event) {
-                            event.preventDefault();
-                            var p = get_mouse_position(event);
-                            for( var i=0; i<4; i++ ) {
-                                var x = points[i][0];
-                                var y = points[i][1];
-                                if( p.x < x + 10 && p.x > x - 10 && p.y < y + 10 && p.y > y - 10 ) {
-                                    drag = i;
-                                    break;
-                                }
-                            }
-                        }, false);
-                        canvas.addEventListener("mousemove", function(event) {
-                            event.preventDefault();
-                            if(drag == null) { return; }
-                            var p = get_mouse_position(event);
-                            points[drag][0] = p.x;
-                            points[drag][1] = p.y;
-                            prepare_lines(ctx2, points, true);
-                            draw_canvas(ctx, ctx1, ctx2);
-                        }, false);
-                        canvas.addEventListener("mouseup", function(event) {
-                            event.preventDefault();
-                            if(drag == null) { return; }
-                            var p = get_mouse_position(event);
-                            points[drag][0] = p.x;
-                            points[drag][1] = p.y;
-                            ctx.clearRect(0, 0, canvas.width, canvas.height);
-                            ctx1.clearRect(0, 0, canvas.width, canvas.height);
-                    var s = (new Date()).getTime();
-                            op.draw(points);
-                    document.getElementById("ms").innerHTML = ( (new Date()).getTime() - s );
-                            prepare_lines(ctx2, points);
-                            draw_canvas(ctx, ctx1, ctx2);
-                            drag = null;
-                        }, false);
-                        canvas.addEventListener("mouseout", function(event) {
-                            event.preventDefault();
-                            drag = null;
-                        }, false);
-                        canvas.addEventListener("mouseenter", function(event) {
-                            event.preventDefault();
-                            drag = null;
-                        }, false);
-
-                    }, false);
-
-
-                    function prepare_lines(ctx, p, with_line) {
-                        ctx.save();
-                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-                        //ctx.clearRect(0, 0, 600, 450);
-                        //
-                        if( with_line == true ) {
-                            ctx.beginPath();
-                            ctx.moveTo(p[0][0], p[0][1]);
-                            for( var i=1; i<4; i++ ) {
-                                ctx.lineTo(p[i][0], p[i][1]);
-                            }
-                            ctx.closePath();
-                            ctx.strokeStyle = "red";
-                            ctx.stroke();
-                        }
-                        //
-                        ctx.fillStyle = "red";
-                        for( var i=0; i<4; i++ ) {
-                            ctx.beginPath();
-                            ctx.arc(p[i][0], p[i][1], 4, 0, Math.PI*2, true);
-                            ctx.fill();
-                        }
-                        //
-                        ctx.restore();
-                    }
-
-                    function draw_canvas(ctx, ctx1, ctx2) {
-<!--                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);-->
-                        ctx.drawImage(ctx1.canvas, 0, 0);
-                        ctx.drawImage(ctx2.canvas, 0, 0);
-                    }
-
-                    function get_mouse_position(event) {
-                        var rect = event.target.getBoundingClientRect() ;
-                        return {
-                            x: event.clientX - rect.left,
-                            y: event.clientY - rect.top
-                        };
-                    }
-
-                    })();
-
-                    </script>
 
                 </div>
-                <p>Processing Time: <span id="ms">-</span> ms</p>
+<!--                <p>Processing Time: <span id="ms">-</span> ms</p>-->
 
 
             </div>
