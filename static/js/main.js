@@ -29,6 +29,7 @@ function loadCanvas(auxcanvas) {
                         var op = null;
                         var points = null
                         var img = new Image();
+                        img.src = "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg";
 
                         img.onload = function() {
                             canvas.width = img.width;
@@ -44,13 +45,18 @@ function loadCanvas(auxcanvas) {
                                         [img.width, img.height],
                                         [0, img.height]
                                        ]
-                        // img
+                                       console.log(points)
                             op.draw(points);
                             prepare_lines(ctx2, points);
+
                             draw_canvas(ctx, ctx1, ctx2);
 
+
+
                         };
-                        img.src = "https://upload.wikimedia.org/wikipedia/commons/d/dc/Flat_Screen.svg";
+
+
+
                         //"{% static 'x/img/pic.jpg' %}";
 
 
@@ -130,9 +136,10 @@ function loadCanvas(auxcanvas) {
                     }
 
                     function draw_canvas(ctx, ctx1, ctx2) {
-<!--                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);-->
+
                         ctx.drawImage(ctx1.canvas, 0, 0);
                         ctx.drawImage(ctx2.canvas, 0, 0);
+//                        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                     }
 
                     function get_mouse_position(event) {
@@ -185,6 +192,7 @@ interact(".interactable")
 
     if (event.ctrlKey) {
 
+
         var target = event.target,
                 // keep the dragged position in the data-x/data-y attributes
                 x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
@@ -197,7 +205,9 @@ interact(".interactable")
 
         // update the posiion attributes
         target.setAttribute('data-x', x);
-        target.setAttribute('data-y', y);}
+        target.setAttribute('data-y', y);
+
+        }
     })
     .on('dragstart', function (event) {
 
@@ -348,6 +358,8 @@ var startPos = {x: 0, y: 0};
         relatedTarget.setAttribute('data-y', y);
         relatedTarget.style.position = "absolute";
         relatedTarget.style.zIndex = 100;
+
+        loadCanvas(relatedTarget);
 
   },
   ondropdeactivate: function (event) {
